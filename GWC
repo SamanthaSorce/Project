@@ -1,0 +1,60 @@
+pip install pandas matplotlib
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data
+data = {
+    'Title': ['Inception', 'Avatar', 'Titanic', 'The Dark Knight', 'The Godfather'],
+    'Genre': ['Sci-Fi', 'Sci-Fi', 'Romance', 'Action', 'Crime'],
+    'Rating': [8.8, 7.8, 7.8, 9.0, 9.2],
+    'Revenue': [829.9, 2788.0, 2187.5, 1004.9, 134.8]  # in millions
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Use a variable to store and print the data of your favorite movie
+favorite_movie = df[df['Title'] == 'Inception']
+print(f"Favorite Movie Data:\n{favorite_movie}\n")
+
+# Use .loc to filter the data set to a genre, and store the data in a new variable
+sci_fi_movies = df.loc[df['Genre'] == 'Sci-Fi']
+print(f"Sci-Fi Movies Data:\n{sci_fi_movies}\n")
+
+# Calculate the min, max, mean, and median of a column (Revenue in this case)
+min_revenue = df['Revenue'].min()
+max_revenue = df['Revenue'].max()
+mean_revenue = df['Revenue'].mean()
+median_revenue = df['Revenue'].median()
+
+print(f"Min Revenue: {min_revenue}")
+print(f"Max Revenue: {max_revenue}")
+print(f"Mean Revenue: {mean_revenue}")
+print(f"Median Revenue: {median_revenue}\n")
+
+# Print how the min, max mean, and median compare to your favorite movie's value
+inception_revenue = favorite_movie['Revenue'].values[0]
+print(f"Inception's Revenue: {inception_revenue}")
+print(f"Inception's revenue compared to Min: {'higher' if inception_revenue > min_revenue else 'lower'}")
+print(f"Inception's revenue compared to Max: {'higher' if inception_revenue > max_revenue else 'lower'}")
+print(f"Inception's revenue compared to Mean: {'higher' if inception_revenue > mean_revenue else 'lower'}")
+print(f"Inception's revenue compared to Median: {'higher' if inception_revenue > median_revenue else 'lower'}\n")
+
+# Create a histogram of the 'Revenue' column
+plt.hist(df['Revenue'], bins=5, color='blue', alpha=0.7)
+plt.xlabel('Revenue (in millions)')
+plt.ylabel('Frequency')
+plt.title('Histogram of Movie Revenues')
+plt.show()
+
+print("The histogram shows the distribution of movie revenues. Most movies have a revenue in the lower range, with a few movies having significantly higher revenues.")
+
+# Create a scatter plot of 'Rating' vs 'Revenue'
+plt.scatter(df['Rating'], df['Revenue'], color='green')
+plt.xlabel('Rating')
+plt.ylabel('Revenue (in millions)')
+plt.title('Scatter Plot of Movie Rating vs Revenue')
+plt.show()
+
+print("The scatter plot shows the relationship between movie ratings and revenues. There is no clear correlation, suggesting that high ratings do not necessarily correspond to high revenues.")
